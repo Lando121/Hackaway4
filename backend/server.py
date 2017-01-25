@@ -46,19 +46,18 @@ class SingleTCPHandler(socketserver.BaseRequestHandler):
         self.send_header("Access-Control-Allow-Origin", "*")
 
 
-def print_data(data):
+'''def print_data(data):
     data = OrderedDict(sorted(data.items(), key=lambda t: t[0]))
     for metro in data:
         print(str.encode(str(metro['GroupOfLineId']) + " " + metro['Destination'] + " " + metro['DisplayTime'] + "\n"))
         self.request.send(str.encode(str(metro['GroupOfLineId']) + " " + metro['Destination'] + " " + metro['DisplayTime'] + "\n"))
         if 'Deviations' in metro:
             for deviation in metro['Deviations']:
-                print(deviation)
+                print(deviation)'''
 
 def calculateStuff(data):
     for bus in data:
         if(bus['LineNumber'] == str(509)):
-            print("hej")
             print(bus['ExpectedDateTime'])
             d1 = datetime.datetime.strptime(bus['ExpectedDateTime'], "%Y-%m-%dT%H:%M:%S")
             d2 = datetime.datetime.strptime(bus['TimeTabledDateTime'], "%Y-%m-%dT%H:%M:%S")

@@ -42,7 +42,7 @@ function updateTrafic() {
                 elem.removeChild(elem.firstChild);
             }
             elem.appendChild(elems);
-            setInterval(updateTrafic, 10000);
+            setInterval(updateTrafic, 10000);// hur ofta den uppdaterar
         }
     });
 }
