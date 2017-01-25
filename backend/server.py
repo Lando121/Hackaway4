@@ -4,14 +4,13 @@ import socketserver, subprocess, sys
 from urllib.request import urlopen
 from threading import Thread
 from pprint import pprint
-import http.server
 import json
-import numpy
+import datetime
 
 HOST = 'localhost'
 PORT = 2000
-API_KEY = '3d9664bc06984271b1a8201621ddea18'
-SITE_ID= '9202'
+API_KEY = '9454dc2de4564ac6a8290d37b731cd21'
+SITE_ID= '3433'#9807, 9202
 
 class SingleTCPHandler(socketserver.BaseRequestHandler):
     "One instance per connection.  Override handle(self) to customize action."
@@ -29,9 +28,13 @@ class SingleTCPHandler(socketserver.BaseRequestHandler):
         self.request.send(("\n").encode('utf-8'))
 
         if path == "/api/v1/sl":
-            text = urlopen('http://api.sl.se/api2/realtimedepartures.json?key='+API_KEY+'&siteid='+SITE_ID+'&timewindow=60')
-            data = json.loads(text.read().decode('utf-8'))['ResponseData']['Metros']
-            self.request.send("5")'''json.dumps(data).encode('utf-8'))'''
+            text = urlopen('http://api.sl.se/api2/realtimedeparturesv4.json?key='+API_KEY+'&siteid='+SITE_ID+'&timewindow=60')
+            '''print(text.read().decode('utf-8'))'''
+            data = json.loads(text.read().decode('utf-8'))['ResponseData']['Buses']
+            print(data)
+            calculateStuff(data)
+            self.request.send(json.dumps(data).encode('utf-8'))
+
         self.request.close()
 
     def end_headers(self):
@@ -43,13 +46,24 @@ class SingleTCPHandler(socketserver.BaseRequestHandler):
         self.send_header("Access-Control-Allow-Origin", "*")
 
 
-def print_data(self, data):
+def print_data(data):
+    data = OrderedDict(sorted(data.items(), key=lambda t: t[0]))
     for metro in data:
         print(str.encode(str(metro['GroupOfLineId']) + " " + metro['Destination'] + " " + metro['DisplayTime'] + "\n"))
         self.request.send(str.encode(str(metro['GroupOfLineId']) + " " + metro['Destination'] + " " + metro['DisplayTime'] + "\n"))
         if 'Deviations' in metro:
             for deviation in metro['Deviations']:
                 print(deviation)
+
+def calculateStuff(data):
+    for bus in data:
+        if(bus['LineNumber'] == str(509)):
+            print("hej")
+            print(bus['ExpectedDateTime'])
+            d1 = datetime.datetime.strptime(bus['ExpectedDateTime'], "%Y-%m-%dT%H:%M:%S")
+            d2 = datetime.datetime.strptime(bus['TimeTabledDateTime'], "%Y-%m-%dT%H:%M:%S")
+            d = d1-d2
+            print(d)
 
 class SimpleServer(socketserver.ThreadingMixIn, socketserver.TCPServer):
     # Ctrl-C will cleanly kill all spawned threads
@@ -67,4 +81,3 @@ if __name__ == "__main__":
         server.serve_forever()
     except KeyboardInterrupt:
         sys.exit(0)
-
