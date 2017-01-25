@@ -6,6 +6,7 @@ from threading import Thread
 from pprint import pprint
 import http.server
 import json
+import numpy
 
 HOST = 'localhost'
 PORT = 2000
@@ -30,8 +31,7 @@ class SingleTCPHandler(socketserver.BaseRequestHandler):
         if path == "/api/v1/sl":
             text = urlopen('http://api.sl.se/api2/realtimedepartures.json?key='+API_KEY+'&siteid='+SITE_ID+'&timewindow=60')
             data = json.loads(text.read().decode('utf-8'))['ResponseData']['Metros']
-            self.request.send(json.dumps(data).encode('utf-8'))
-
+            self.request.send("5")'''json.dumps(data).encode('utf-8'))'''
         self.request.close()
 
     def end_headers(self):
@@ -43,14 +43,13 @@ class SingleTCPHandler(socketserver.BaseRequestHandler):
         self.send_header("Access-Control-Allow-Origin", "*")
 
 
-def print_data(data):
-
-    '''for metro in data:
+def print_data(self, data):
+    for metro in data:
         print(str.encode(str(metro['GroupOfLineId']) + " " + metro['Destination'] + " " + metro['DisplayTime'] + "\n"))
         self.request.send(str.encode(str(metro['GroupOfLineId']) + " " + metro['Destination'] + " " + metro['DisplayTime'] + "\n"))
         if 'Deviations' in metro:
             for deviation in metro['Deviations']:
-                print(deviation)'''
+                print(deviation)
 
 class SimpleServer(socketserver.ThreadingMixIn, socketserver.TCPServer):
     # Ctrl-C will cleanly kill all spawned threads
@@ -69,5 +68,3 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         sys.exit(0)
 
-class Calculation():
-    data = []

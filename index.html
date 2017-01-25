@@ -13,17 +13,18 @@
 
     <!-- Latest compiled JavaScript -->
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-sanitize.js"></script>
+    <script src="javascript/jquery.js"></script>
 
     <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
     <title> TimeIt
     </title>
   </head>
-  <body d="main" >
+  <body ng-app="TimeIt" ng-view id="main" >
    	<div id="container">
-   	<button type="button" onclick="getStation('centralen')">centralen</button>
    	</div>
 
   </body>
-  <script src="js/TimeTableAPI.js"></script>
+
 </html>
