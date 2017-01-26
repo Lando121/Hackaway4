@@ -4,7 +4,7 @@ function updateTrafic() {
         type: "GET",
         dataType: "text",
         success: function(data){
-            json_data = JSON.parse(data);
+            var json_data = JSON.parse(data);
             console.log(data);
             var elems = document.createElement('div');
             elems.className = "traficEntries";
@@ -47,4 +47,4 @@ function updateTrafic() {
     });
 }
 
-updateTrafic();
+//updateTrafic();

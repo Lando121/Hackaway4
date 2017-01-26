@@ -19,3 +19,4 @@ function printResponse(response) {
 function getStation(name){
     APICall(name, printResponse);
 }
+
