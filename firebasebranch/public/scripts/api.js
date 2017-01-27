@@ -64,23 +64,17 @@ api.APIcall_realtid = function(method, parameters, callback){
 }
 */
 
+//"http://api.sl.se/api2/realtimedeparturesV4.json?key=9454dc2de4564ac6a8290d37b731cd21&siteid=3433&timewindow=30"
 
-api.APIcall_realtid = function(station, lineNumber, callback) {
+api.APIcall_realtid = function(){
     $.ajax({
-        url: "http://api.sl.se/api2/realtimedeparturesV4.json?key=9454dc2de4564ac6a8290d37b731cd21&siteid=3433&timewindow=30",
-        type: "GET",
-        dataType: "text",
-        success: function(data){
-            var json_data = JSON.parse(data);
-            console.log('success')
-            }  
+        type : 'GET',
+        url : "http://api.sl.se/api2/realtimedeparturesV4.json?key=9454dc2de4564ac6a8290d37b731cd21&siteid=3433&timewindow=30",
+        success : function(data){
+            console.log('success', data);
         }
     });
-                  
 }
-
-
-//http://api.sl.se/api2/realtimedeparturesV4.json?key=9454dc2de4564ac6a8290d37b731cd21&siteid=3433&timewindow=30
 
 
 //Fetches realtime data for hardcoded kungshamra siteid=3433

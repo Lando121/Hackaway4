@@ -58,7 +58,7 @@ $( "#searchButton" ).click(function() {
  * Get realtime data for kungshamra?
  ************************************************/
   $( "#getRealTest" ).click(function() {
-    api.getRealTest(printToConsole);
+    api.APIcall_realtid();
   });
     
     console.log( "main.js completely ready" );
