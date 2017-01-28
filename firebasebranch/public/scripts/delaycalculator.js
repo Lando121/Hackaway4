@@ -16,6 +16,11 @@ function parseData(list, long, lat, siteID, callback){
     averageDelay = averageDelay/list.length;
     var longitud = [long.slice(0, 2), ".", long.slice(2)].join('');
     var latitud = [lat.slice(0, 2), ".", lat.slice(2)].join('');
+    longitud = parseFloat(longitud);
+    latitud = parseFloat(latitud);
+    console.log(typeof longitud);
+
+
     console.log("siteid is: " + siteID + " longitud: " + longitud + ", latitude: " + latitud + ". Average delay is: " + averageDelay);
     callback(siteID, latitud, longitud, averageDelay, 'timestamp');
 }
@@ -27,6 +32,9 @@ function realTid(siteID, long, lat, callback){
         type: "GET",
         dataType: "text",
         success: function(data){
+            if(data === undefined){
+                return;
+            }
             var json_data = JSON.parse(data);
             for(i = 0; i < typeOftransport.length; i++){
                 for (j = 0; j<json_data.ResponseData[typeOftransport[i]].length; j++){

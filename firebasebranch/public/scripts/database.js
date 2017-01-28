@@ -33,7 +33,7 @@ database.writeWordToRecent = function(word){
 database.updateDelay = function(siteID, lat, long, avgDelay,timestamp) {
   console.log('in update');
   firebase.database().ref('mapdata/' + siteID).set({
-    center: {lat:lat,long:long},
+    center: {lat:lat,lng:long},
     avgDelay: avgDelay,
     timestamp : timestamp
   });
@@ -42,8 +42,9 @@ database.updateDelay = function(siteID, lat, long, avgDelay,timestamp) {
 
 database.readCurrentDelays = function(callback){
 return firebase.database().ref('/mapdata/').once('value').then(function(snapshot) {
+  console.log('inside readCurrentDelays');
   var data = snapshot.val();
-  callback(JSON.stringify(data));
+  callback(data);
 });
 }
 

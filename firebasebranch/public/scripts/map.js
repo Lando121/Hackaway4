@@ -30,3 +30,19 @@ map.drawCircles = function(listOfStations){
         });
     }
 }
+
+//Takes a single station as input and draws point on map
+map.drawCircle = function(station){
+        // Add the circle for this station to the map.
+        console.log(station);
+        var stationCircle = new google.maps.Circle({
+            strokeColor: '#FF0000',
+            strokeOpastation: 0.8,
+            strokeWeight: 2,
+            fillColor: '#FF0000',
+            fillOpastation: 0.35,
+            map: mapObject,
+            center: station.center,
+            radius: 100 + station.avgDelay*10
+        });
+}

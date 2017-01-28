@@ -113,16 +113,36 @@ var LIST_OF_STATIONS = [];
 /***************************************
 * Generate mapdata and put into database
 ****************************************/
-function updateDatabase(listOfStations){
+function updateDatabase(){
+  listOfStations = ["karolinska sjukhuset", "norrtull", "ruddammen", "östra station", "hjorthagen", "storängsbotten", "ropsten", "odenplan", "s:t eriksplan", "karlsbergs station", "karolinska institutet", "hornsberg", "fridhemsplan", "fredhäll", "stora essingen", "centralen", "kungsträdgården", "karlaplan", "radiohuset", "skansen", "skeppsholmen", "reimersholme", "långholmen", "hornstull", "södra station", "tanto", "liljeholmen", "södersjukhuset", "mariatorget", "slussen", "waldemarsudde", "sofia", "gullmarsplan", "norra hammarbyhamnen", "sickla udde", "henriksdalsberget", "sickla köpkvarter", "finnberget", "frihamnen", "kaknästornet"];
   for (i = 0; i<listOfStations.length; i++){
     delaycalculator.platsuppslag(listOfStations[i], database.updateDelay);
   }
 }
 
-/***************************************
+/*********************
 * Generate map circles
-****************************************/
+**********************/
+//Get data from database
 
+function extractionCallback(data){
+  console.log('inside extractionCallback');
+  for(var key in data){
+    if(data.hasOwnProperty(key)){
+      //console.log(data[key]);
+      map.drawCircle(data[key]);
+    }
+  }
+}
+
+function generateMapCircles(){
+  console.log('inside generateMapCircles');
+  database.readCurrentDelays(extractionCallback); //extract from
+}
+
+
+
+//for each station, draw map
 
 
 /***************************************
