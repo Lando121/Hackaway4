@@ -128,7 +128,7 @@ function updateDatabase(){
 function extractionCallback(data){
   console.log('inside extractionCallback');
   for(var key in data){
-    if(data.hasOwnProperty(key)){
+    if(data.hasOwnProperty(key) && (Date.now() - data[key].timestamp) < 900000 ){ //15min
       //console.log(data[key]);
       map.drawCircle(data[key]);
     }
@@ -140,6 +140,7 @@ function generateMapCircles(){
   database.readCurrentDelays(extractionCallback); //extract from
 }
 
+//setInterval(generateMapCircles, 10000);
 
 
 //for each station, draw map
