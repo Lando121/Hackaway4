@@ -10,9 +10,9 @@ When sending a request to the api, remember to include a callback function.
 $( document ).ready(function() {
 
 
-//Use as callback when you just want to see response frm api call in console
+//Use as callback when you just want to see response from api call in console
 function printToConsole(response) {
-    console.log(response);
+  console.log(response);
 }
 
 
@@ -37,37 +37,99 @@ $( "#searchButton" ).click(function() {
 });
 
 //Handles "enter" press. Suppress standard form submit and instead make API call 
- $('#custom-search-form').submit(function(e){
-      e.preventDefault();
-      var searchInput = $( "#searchInput" ).val()
-      database.writeWordToRecent(searchInput);
-      api.getStation(searchInput, printToConsole);
- });
+$('#custom-search-form').submit(function(e){
+  e.preventDefault();
+  var searchInput = $( "#searchInput" ).val()
+  database.writeWordToRecent(searchInput);
+  api.getStation(searchInput, printToConsole);
+});
 
 
 
 /***********************************************
 * Gets the 10 closest stations to Mårdstigen 15
 ************************************************/
- $( "#getNearbyStations" ).click(function() {
-   api.getNearbyStations(printToConsole);
+$( "#getNearbyStations" ).click(function() {
+ api.getNearbyStations(printToConsole);
 
- });
+});
 
  /***********************************************
  * Get realtime data for kungshamra?
  ************************************************/
-  $( "#getRealTest" ).click(function() {
-    api.APIcall_realtid();
-  });
-
-    /***********************************************
-     * Show map
-     ************************************************/
-    $("#ShowMap").click(function () {
-       initMap();
-    });
-    console.log( "main.js completely ready" );
+ $( "#getRealTest" ).click(function() {
+  api.APIcall_realtid();
 });
+
+/***********************************************
+* Draw circles on map
+************************************************/
+var listOfStations = {
+  1234: {
+    center: {lat: 59.878, lng: 18.629},
+    population: 2713
+  }
+};
+
+$("#ShowMap").click(function () {
+ map.drawCircles(listOfStations);
+});
+console.log( "main.js completely ready" );
+});
+
+/***********************************************
+* Gets the 10 closest stations to Mårdstigen 15
+************************************************/
+$( "#getCurrentStations" ).click(function() {
+ database.getCurrentStations();
+
+});
+
+/***********************************************
+* Generate fake map_data
+************************************************/
+$( "#fakeMapdata" ).click(function() {
+  console.log('Generating fake mapdata...');
+  database.updateDelay('siteID3','lat3','long3','avgdelay3','timestamp3');
+});
+
+
+function extractJSON(data){
+  console.log('extractJSON');
+  console.log(data);
+}
+
+$( "#readCurrent" ).click(function() {
+  console.log('Reading current data...');
+  database.readCurrentDelays(extractJSON);
+});
+
+
+/*********************
+* ACTUAL START OF MAIN
+**********************/
+var LIST_OF_STATIONS = [];
+
+/***************************************
+* Generate mapdata and put into database
+****************************************/
+function updateDatabase(listOfStations){
+  for (i = 0; i<listOfStations.length; i++){
+    delaycalculator.platsuppslag(listOfStations[i], database.updateDelay);
+  }
+}
+
+/***************************************
+* Generate map circles
+****************************************/
+
+
+
+/***************************************
+* Build rest of UI
+****************************************/
+
+
+
 
 
