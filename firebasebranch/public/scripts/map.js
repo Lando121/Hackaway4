@@ -4,6 +4,7 @@
 
 var map = {};
 var mapObject;
+var overlays = [];
 
 //Initialisation function run as callback in api call to googleapi in index.html
 function initMap() {
@@ -31,6 +32,13 @@ map.drawCircles = function(listOfStations){
     }
 }
 
+map.clearMap = function(){
+    console.log(overlays);
+    while(overlays[0]){
+        overlays.pop().setMap(null);
+    }
+}
+
 //Takes a single station as input and draws point on map
 map.drawCircle = function(station){
         // Add the circle for this station to the map.
@@ -45,4 +53,5 @@ map.drawCircle = function(station){
             center: station.center,
             radius: 100 + station.avgDelay*10
         });
+        overlays.push(stationCircle);
 }
