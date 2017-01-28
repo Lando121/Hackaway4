@@ -67,8 +67,8 @@ function parseData(list, long, lat, siteID){
         averageDelay += delay;
     }
     averageDelay = averageDelay/list.length;
-    var longitud = [long.slice(0, 2), ",", long.slice(2)].join('');
-    var latitud = [lat.slice(0, 2), ",", lat.slice(2)].join('');
+    var longitud = [long.slice(0, 2), ".", long.slice(2)].join('');
+    var latitud = [lat.slice(0, 2), ".", lat.slice(2)].join('');
     console.log("siteid is: " + siteID + " longitud: " + longitud + ", latitude: " + latitud + ". Average delay is: " + averageDelay);
 }
 
