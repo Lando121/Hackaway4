@@ -60,7 +60,14 @@ $( "#searchButton" ).click(function() {
   $( "#getRealTest" ).click(function() {
     api.APIcall_realtid();
   });
-    
+
+    /***********************************************
+     * Show map
+     ************************************************/
+    $("#ShowMap").click(function () {
+       initMap();
+    });
     console.log( "main.js completely ready" );
 });
+
 
