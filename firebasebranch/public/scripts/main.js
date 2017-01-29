@@ -121,20 +121,24 @@ function updateDatabase(){
 }
 
 /*********************
-* Generate map circles
+* Generate heat map
 **********************/
 //Get data from database
 
 function extractionCallback(data){
   console.log('inside extractionCallback');
+    var heatmapData = [];
   for(var key in data){
     if(data.hasOwnProperty(key)){
-      //console.log(data[key]);
-      map.drawCircle(data[key]);
+      //console.log(data[key].center.lat);
+      //map.drawCircle(data[key]);
+        //console.log("hej"+data[key].center.lat);
+        heatmapData.push({location: new google.maps.LatLng(data[key].center.lat, data[key].center.lng), weight:data[key].avgDelay});
     }
   }
+    map.drawHeatmap(heatmapData);
 }
-
+generateMapCircles();
 function generateMapCircles(){
   console.log('inside generateMapCircles');
   database.readCurrentDelays(extractionCallback); //extract from

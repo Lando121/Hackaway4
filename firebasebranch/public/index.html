@@ -30,46 +30,36 @@
 <body>
   <div class="main">
 
-    <h2>Hackaway 4</h2>
+    <h1>Störningar i busstrafik</h1>
+    <h2>just nu i Stockholm</h2>
 
-    <!-- Search form -->
-    <div class="container">
-      <div class="row">
-        <div class="span12">
-          <form id="custom-search-form" class="form-search form-horizontal pull-right">
-            <div class="input-append span12">
-              <input type="text" class="search-query" placeholder="Search" id="searchInput">
-              <!--type="button" to avoid reloading site-->
-              <button id="searchButton" type="button" class="btn"><i class="glyphicon glyphicon-search"></i></button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
 
-    <div id="recentSearches">
-      <ul id="list">
-        
-      </ul>
-    </div>
-
-    <button id="getNearbyStations">Get Nearby Stations</button>
+   <!-- <button id="getNearbyStations">Get Nearby Stations</button>
     <button id="getRealTest">Get realtime kungshamra</button>
     <button id="ShowMap">Update Map</button>
     <button id="fakeMapdata">Generate fake mapdata</button>
-    <button id="readCurrent">Read current data</button>
+    <button id="readCurrent">Read current data</button> -->
 
 
   </div>
+  <div id="style-selector-control"  class="map-control">
+    <select id="style-selector" class="selector-control">
+      <option value="default">Default</option>
+      <option value="silver">Silver</option>
+      <option value="night">Night mode</option>
+      <option value="retro" selected="selected">Retro</option>
+      <option value="hiding">Hide features</option>
+    </select>
+  </div>
 <div id = "map"></div>
   <!-- JAVASCRIPT FILES -->
-
   <script src="scripts/api.js"></script>
   <script src="scripts/database.js"></script>
   <script src="scripts/map.js"></script>
   <script src="scripts/delaycalculator.js"></script>
   <script src="scripts/main.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCiBV8lNL5MldVr5hrc0IhN1jZjExSIxY0&callback=initMap"></script>
+
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCiBV8lNL5MldVr5hrc0IhN1jZjExSIxY0&callback=initMap&libraries=visualization"></script>
 
 </body>
 </html>
