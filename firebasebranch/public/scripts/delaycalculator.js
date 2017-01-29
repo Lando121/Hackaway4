@@ -22,6 +22,9 @@ function parseData(list, long, lat, siteID, callback){
 
 
     console.log("siteid is: " + siteID + " longitud: " + longitud + ", latitude: " + latitud + ". Average delay is: " + averageDelay);
+    if(averageDelay < 0){
+        averageDelay = 0;
+    }
     callback(siteID, latitud, longitud, averageDelay, Date.now());
 }
 
