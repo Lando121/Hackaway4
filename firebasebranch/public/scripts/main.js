@@ -131,18 +131,23 @@ function wait(ms){
 }
 
 /*********************
-* Generate map circles
+* Generate heat map
 **********************/
 //Get data from database
 
 function extractionCallback(data){
   console.log('inside extractionCallback');
+    var heatmapData = [];
   for(var key in data){
     if(data.hasOwnProperty(key) && (Date.now() - data[key].timestamp) < 900000 ){ //15min
       //console.log(data[key]);
-      map.drawCircle(data[key]);
+      //console.log(data[key].center.lat);
+      //map.drawCircle(data[key]);
+        //console.log("hej"+data[key].center.lat);
+        heatmapData.push({location: new google.maps.LatLng(data[key].center.lat, data[key].center.lng), weight:data[key].avgDelay});
     }
   }
+    map.drawHeatmap(heatmapData);
 }
 
 function extractionCallbackStations(data){
@@ -153,7 +158,6 @@ function extractionCallbackStations(data){
   }
   console.log(LIST_OF_STATIONS.length);
 }
-
 
 function generateMapCircles(){
   //console.log('inside generateMapCircles');
@@ -169,8 +173,6 @@ function generateStationList(){
 //setInterval(generateMapCircles, 10000);
 //setInterval(updateDatabase, 5000);
 
-
-//for each station, draw map
 
 
 /***************************************
