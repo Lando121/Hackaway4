@@ -1,4 +1,4 @@
-var platsuppslagAPI_KEY = "5ba1e38768d7438bb43f62a6ce073cba";
+var platsuppslagAPI_KEY = "c9c1a20b33e640769a2558405c591f6b";
 var realtidsAPI_KEY = "9454dc2de4564ac6a8290d37b731cd21";
 var typeOftransport = ["Buses", "Metros", "Ships", "Trains", "Trams"];
 
@@ -22,6 +22,9 @@ function parseData(list, long, lat, siteID, callback){
 
 
     console.log("siteid is: " + siteID + " longitud: " + longitud + ", latitude: " + latitud + ". Average delay is: " + averageDelay);
+    if(averageDelay < 0){
+        averageDelay = 0;
+    }
     callback(siteID, latitud, longitud, averageDelay, Date.now());
 }
 

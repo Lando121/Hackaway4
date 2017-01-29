@@ -10,6 +10,7 @@ When sending a request to the api, remember to include a callback function.
 $( document ).ready(function() {
 
 
+
 //Use as callback when you just want to see response from api call in console
 function printToConsole(response) {
   console.log(response);
@@ -114,9 +115,18 @@ var LIST_OF_STATIONS = [];
 * Generate mapdata and put into database
 ****************************************/
 function updateDatabase(){
-  listOfStations = ["karolinska sjukhuset", "norrtull", "ruddammen", "östra station", "hjorthagen", "storängsbotten", "ropsten", "odenplan", "s:t eriksplan", "karlsbergs station", "karolinska institutet", "hornsberg", "fridhemsplan", "fredhäll", "stora essingen", "centralen", "kungsträdgården", "karlaplan", "radiohuset", "skansen", "skeppsholmen", "reimersholme", "långholmen", "hornstull", "södra station", "tanto", "liljeholmen", "södersjukhuset", "mariatorget", "slussen", "waldemarsudde", "sofia", "gullmarsplan", "norra hammarbyhamnen", "sickla udde", "henriksdalsberget", "sickla köpkvarter", "finnberget", "frihamnen", "kaknästornet"];
-  for (i = 0; i<listOfStations.length; i++){
-    delaycalculator.platsuppslag(listOfStations[i], database.updateDelay);
+  //listOfStations = ["karolinska sjukhuset", "norrtull", "ruddammen", "östra station", "hjorthagen", "storängsbotten", "ropsten", "odenplan", "s:t eriksplan", "karlsbergs station", "karolinska institutet", "hornsberg", "fridhemsplan", "fredhäll", "stora essingen", "centralen", "kungsträdgården", "karlaplan", "radiohuset", "skansen", "skeppsholmen", "reimersholme", "långholmen", "hornstull", "södra station", "tanto", "liljeholmen", "södersjukhuset", "mariatorget", "slussen", "waldemarsudde", "sofia", "gullmarsplan", "norra hammarbyhamnen", "sickla udde", "henriksdalsberget", "sickla köpkvarter", "finnberget", "frihamnen", "kaknästornet"];
+  for (i = 0; i<100; i++){
+    delaycalculator.platsuppslag(LIST_OF_STATIONS[i], database.updateDelay);
+  }
+}
+
+function wait(ms){
+   var start = new Date().getTime();
+   var end = start;
+   while(end < start + ms) {
+    console.log("asdf");
+     end = new Date().getTime();
   }
 }
 
@@ -139,13 +149,29 @@ function extractionCallback(data){
   }
     map.drawHeatmap(heatmapData);
 }
-generateMapCircles();
+
+function extractionCallbackStations(data){
+  for(var key in data){
+      //console.log(data[key]);
+      LIST_OF_STATIONS.push(data[key].station);
+    
+  }
+  console.log(LIST_OF_STATIONS.length);
+}
+
 function generateMapCircles(){
-  console.log('inside generateMapCircles');
+  //console.log('inside generateMapCircles');
   database.readCurrentDelays(extractionCallback); //extract from
 }
 
+function generateStationList(){
+
+  database.readCurrentStations(extractionCallbackStations);
+}
+
+//updateDatabase(getStations.listOfStations);
 //setInterval(generateMapCircles, 10000);
+//setInterval(updateDatabase, 5000);
 
 
 

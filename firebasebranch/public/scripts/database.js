@@ -48,6 +48,20 @@ return firebase.database().ref('/mapdata/').once('value').then(function(snapshot
 });
 }
 
+database.readCurrentStations = function(callback){
+  console.log("inside readCurrentStations");
+return firebase.database().ref('/stations/').once('value').then(function(snapshot) {
+  var data = snapshot.val();
+  callback(data);
+});
+}
+
+database.addToStationDatabase = function(station){
+  firebase.database().ref('stations/' + station).set({
+    station: station
+  });
+}
+
 
 
 
