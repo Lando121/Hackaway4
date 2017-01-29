@@ -13,7 +13,7 @@ function initMap() {
         center: new google.maps.LatLng(59.3293, 18.0686),
         mapTypeId: 'roadmap',
         //draggable: false,
-        minZoom: 5,
+        minZoom: 9,
         maxZoom: 20
         //mapTypeControl: false
     });
