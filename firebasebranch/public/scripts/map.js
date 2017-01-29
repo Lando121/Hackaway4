@@ -354,5 +354,6 @@ map.drawHeatmap = function(heatmapData){
     var heatmap = new google.maps.visualization.HeatmapLayer({
         data: heatmapData
     });
+    overlays.push(heatmap);
     heatmap.setMap(mapObject);
 }

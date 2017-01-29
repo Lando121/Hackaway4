@@ -161,6 +161,7 @@ function extractionCallbackStations(data){
 
 function generateMapCircles(){
   //console.log('inside generateMapCircles');
+  map.clearMap();
   database.readCurrentDelays(extractionCallback); //extract from
 }
 
