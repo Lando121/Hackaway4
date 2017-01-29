@@ -144,7 +144,7 @@ function extractionCallback(data){
       //console.log(data[key].center.lat);
       //map.drawCircle(data[key]);
         //console.log("hej"+data[key].center.lat);
-        heatmapData.push({location: new google.maps.LatLng(data[key].center.lat, data[key].center.lng), weight:data[key].avgDelay});
+        heatmapData.push({location: new google.maps.LatLng(data[key].center.lat, data[key].center.lng), weight:(data[key].avgDelay*12)});
     }
   }
     map.drawHeatmap(heatmapData);
@@ -171,8 +171,10 @@ function generateStationList(){
 }
 
 //updateDatabase(getStations.listOfStations);
+generateMapCircles();
 setInterval(generateMapCircles, 10000);
-//setInterval(updateDatabase, 5000);
+generateStationList(updateDatabase);
+setInterval(updateDatabase, 60000);
 
 
 
