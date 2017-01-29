@@ -4,6 +4,7 @@
 
 var map = {};
 var mapObject;
+var overlays = [];
 
 //Initialisation function run as callback in api call to googleapi in index.html
 function initMap() {
@@ -325,21 +326,29 @@ var styles = {
 };
 
 
+map.clearMap = function(){
+    console.log(overlays);
+    while(overlays[0]){
+        overlays.pop().setMap(null);
+    }
+}
+
 //Takes a single station as input and draws point on map
 /*map.drawCircle = function(station){
         // Add the circle for this station to the map.
         console.log(station);
         var stationCircle = new google.maps.Circle({
             strokeColor: '#FF0000',
-            strokeOpacity: 0.8,
+            strokeOpastation: 0.8,
             strokeWeight: 2,
             fillColor: '#FF0000',
-            fillOpacity: 0.70*station.avgDelay,
+            fillOpastation: 0.35,
             map: mapObject,
             center: station.center,
-            radius: 100 //+ station.avgDelay*10
-        });
-}*/
+            radius: 100 + station.avgDelay*10
+        });*/
+
+
 //Takes an array with heatMap objects as argument, prints a heatmap on the screen
 map.drawHeatmap = function(heatmapData){
     var heatmap = new google.maps.visualization.HeatmapLayer({

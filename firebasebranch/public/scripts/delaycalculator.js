@@ -22,7 +22,7 @@ function parseData(list, long, lat, siteID, callback){
 
 
     console.log("siteid is: " + siteID + " longitud: " + longitud + ", latitude: " + latitud + ". Average delay is: " + averageDelay);
-    callback(siteID, latitud, longitud, averageDelay, 'timestamp');
+    callback(siteID, latitud, longitud, averageDelay, Date.now());
 }
 
 function realTid(siteID, long, lat, callback){

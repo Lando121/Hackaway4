@@ -129,7 +129,8 @@ function extractionCallback(data){
   console.log('inside extractionCallback');
     var heatmapData = [];
   for(var key in data){
-    if(data.hasOwnProperty(key)){
+    if(data.hasOwnProperty(key) && (Date.now() - data[key].timestamp) < 900000 ){ //15min
+      //console.log(data[key]);
       //console.log(data[key].center.lat);
       //map.drawCircle(data[key]);
         //console.log("hej"+data[key].center.lat);
@@ -144,9 +145,8 @@ function generateMapCircles(){
   database.readCurrentDelays(extractionCallback); //extract from
 }
 
+//setInterval(generateMapCircles, 10000);
 
-
-//for each station, draw map
 
 
 /***************************************
