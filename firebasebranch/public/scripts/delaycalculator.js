@@ -67,7 +67,7 @@ delaycalculator.platsuppslag = function(station, callback){
                 var stationName = objStr.substring(0, objStr.indexOf('(')).trim();
                 
                 if(stationName.toLowerCase().trim() === station.toLowerCase().trim()){
-                    console.log(json_data.ResponseData[i].SiteId);
+                    //console.log(json_data.ResponseData[i].SiteId);
                     realTid(json_data.ResponseData[i].SiteId, json_data.ResponseData[i].X, json_data.ResponseData[i].Y, callback);
                     
                 }
