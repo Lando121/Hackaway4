@@ -19,7 +19,6 @@
 
   <!-- Custom CSS -->
   <link rel="stylesheet" href="css/main.css">
-  <link rel="stylesheet" href="css/search-form.css">
 
   <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/3.6.7/firebase.js"></script>
@@ -29,19 +28,10 @@
 
 <body>
   <div class="main">
-
     <h1>Störningar i busstrafik</h1>
     <h2>just nu i Stockholm</h2>
-
-
-   <!-- <button id="getNearbyStations">Get Nearby Stations</button>
-    <button id="getRealTest">Get realtime kungshamra</button>
-    <button id="ShowMap">Update Map</button>
-    <button id="fakeMapdata">Generate fake mapdata</button>
-    <button id="readCurrent">Read current data</button> -->
-
-
   </div>
+
   <div id="style-selector-control"  class="map-control">
     <select id="style-selector" class="selector-control">
       <option value="default">Default</option>
@@ -51,8 +41,10 @@
       <option value="hiding">Hide features</option>
     </select>
   </div>
-<div id = "map"></div>
-<div id="list"></div>
+
+  <div id = "map"></div>
+  <div id="list"></div>
+
   <!-- JAVASCRIPT FILES -->
   <script src="scripts/api.js"></script>
   <script src="scripts/database.js"></script>
@@ -60,7 +52,7 @@
   <script src="scripts/map.js"></script>
   <script src="scripts/delaycalculator.js"></script>
   <script src="scripts/main.js"></script>
-
+  <!-- Google maps api (sends initMap as a callback function) -->
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCiBV8lNL5MldVr5hrc0IhN1jZjExSIxY0&callback=initMap&libraries=visualization"></script>
 
 </body>
